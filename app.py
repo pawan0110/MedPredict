@@ -4,7 +4,7 @@ import numpy as np
 
 app = Flask(__name__)
 
-model = joblib.load("models/diabetes_rf_pipeline.pkl")
+model = joblib.load("models/diabetes_final_model.pkl")
 
 
 @app.route("/")
