@@ -6,11 +6,20 @@
     <title>Prediction Result</title>
 </head>
 <body>
+
     <h2>Prediction Result</h2>
 
-    <p><strong>Result:</strong> {{ prediction }}</p>
-    <p><strong>Probability:</strong> {{ probability }}%</p>
+    <p><strong>Diagnosis:</strong> {{ prediction }}</p>
+    <p><strong>Diabetes Probability:</strong> {{ probability }}%</p>
 
-    <a href="/">Go Back</a>
+    {% if prediction == "Diabetic" %}
+        <p style="color: red;"><strong>⚠ High Risk Detected. Please consult a healthcare professional.</strong></p>
+    {% else %}
+        <p style="color: green;"><strong>✓ Low Risk of Diabetes.</strong></p>
+    {% endif %}
+
+    <br>
+    <a href="/">Check Another Patient</a>
+
 </body>
 </html>

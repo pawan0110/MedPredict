@@ -1,56 +1,124 @@
 from flask import Flask, render_template, request
 import joblib
-import numpy as np
+import pandas as pd
 
 app = Flask(__name__)
 
-model = joblib.load("models/diabetes_final_model.pkl")
+# ==============================
+# Load Model + Threshold
+# ==============================
+model_data = joblib.load("models/diabetes_model.pkl")
+
+model = model_data["model"]
+THRESHOLD = 0.45
 
 
+# ==============================
+# Home Route
+# ==============================
 @app.route("/")
 def home():
     return render_template("index.html")
 
+
+# ==============================
+# Prediction Route
+# ==============================
 @app.route("/predict", methods=["POST"])
 def predict():
     try:
-         # Get form values (must match input names in HTML)
-        pregnancies = float(request.form["Pregnancies"])
-        glucose = float(request.form["Glucose"])
-        blood_pressure = float(request.form["BloodPressure"])
-        skin_thickness = float(request.form["SkinThickness"])
-        insulin = float(request.form["Insulin"])
-        bmi = float(request.form["BMI"])
-        dpf = float(request.form["DiabetesPedigreeFunction"])
-        age = float(request.form["Age"])    
+        # --------------------------
+        # 1️⃣ Basic Numeric Inputs
+        # --------------------------
+        age = float(request.form["age"])
+        hypertension = int(request.form["hypertension"])
+        heart_disease = int(request.form["heart_disease"])
+        bmi = float(request.form["bmi"])
+        hbA1c_level = float(request.form["hbA1c"])
+        blood_glucose_level = float(request.form["glucose"])
 
-         # Arrange input in same order as training data
-        input_data = np.array([[
-            pregnancies,
-            glucose,
-            blood_pressure,
-            skin_thickness,
-            insulin,
-            bmi,
-            dpf,
-            age
-        ]])   
+        # --------------------------
+        # 2️⃣ Encode Gender (Manual)
+        # --------------------------
+        gender = 1 if request.form["gender"] == "Male" else 0
 
-        prediction = model.predict(input_data)[0]
-        probability = model.predict_proba(input_data)[0][1]
+        # --------------------------
+        # 3️⃣ Encode Location
+        # --------------------------
+        location = 1 if request.form["location"] == "Urban" else 0
 
-        result = "Daibetic" if prediction == 1 else "Not daibetic"
+        # --------------------------
+        # 4️⃣ Encode Smoking
+        # --------------------------
+        smoking_map = {
+            "never": 0,
+            "former": 1,
+            "current": 2
+        }
+        smoking_history = smoking_map[request.form["smoking_history"]]
+
+        # --------------------------
+        # 5️⃣ One-Hot Encode Race
+        # --------------------------
+        selected_race = request.form["race"]
+
+        race_dict = {
+            "race:AfricanAmerican": 0,
+            "race:Asian": 0,
+            "race:Caucasian": 0,
+            "race:Hispanic": 0,
+            "race:Other": 0
+        }
+
+        race_dict[f"race:{selected_race}"] = 1
+
+        # --------------------------
+        # 6️⃣ Final Input Dictionary
+        # --------------------------
+        input_data = {
+            "gender": gender,
+            "age": age,
+            "location": location,
+            **race_dict,
+            "hypertension": hypertension,
+            "heart_disease": heart_disease,
+            "smoking_history": smoking_history,
+            "bmi": bmi,
+            "hbA1c_level": hbA1c_level,
+            "blood_glucose_level": blood_glucose_level
+        }
+
+        input_df = pd.DataFrame([input_data])
+
+        # --------------------------
+        # 7️⃣ Predict
+        # --------------------------
+        prob = model.predict_proba(input_df)[0][1]
+        prediction = 1 if prob > THRESHOLD else 0
+
+        result = "Diabetic" if prediction else "Not Diabetic"
+
+        # Risk interpretation
+        if prob < 0.30:
+            risk_level = "Low Risk"
+        elif prob < 0.60:
+            risk_level = "Moderate Risk"
+        else:
+            risk_level = "High Risk"
 
         return render_template(
             "result.html",
             prediction=result,
-            probability=round(probability*100,2)
-        )  
-                            
-    except Exception as e:
-        return f"Error occured: {e}"
-    
+            probability=round(prob * 100, 2),
+            risk_level=risk_level
+        )
 
+    except Exception as e:
+        return f"Error occurred: {e}"
+
+
+# ==============================
+# Run App
+# ==============================
 if __name__ == "__main__":
     app.run(debug=True)
-   
