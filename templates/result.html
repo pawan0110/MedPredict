@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Result</title>
 </head>
 <body>
 
-    <h2>Prediction Result</h2>
+<h2>{{ disease }} Prediction Result</h2>
 
-    <p><strong>Diagnosis:</strong> {{ prediction }}</p>
-    <p><strong>Diabetes Probability:</strong> {{ probability }}%</p>
+<p><strong>Diagnosis:</strong> {{ prediction }}</p>
+<p><strong>Probability:</strong> {{ probability }}%</p>
+<p><strong>Risk Level:</strong> {{ risk_level }}</p>
 
-    {% if prediction == "Diabetic" %}
-        <p style="color: red;"><strong>⚠ High Risk Detected. Please consult a healthcare professional.</strong></p>
-    {% else %}
-        <p style="color: green;"><strong>✓ Low Risk of Diabetes.</strong></p>
-    {% endif %}
+{% if prediction in ["Diabetic", "Heart Disease Detected"] %}
+    <p style="color:red;"><strong>⚠ High Risk. Please consult a doctor.</strong></p>
+{% else %}
+    <p style="color:green;"><strong>✓ Low Risk Detected.</strong></p>
+{% endif %}
 
-    <br>
-    <a href="/">Check Another Patient</a>
+<br>
+<a href="/">Check Another Patient</a>
 
 </body>
 </html>
