@@ -5,21 +5,44 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">s
 </head>
 <body>
+<div class="container">
 
-<h2>{{ disease }} Prediction Result</h2>
+<div class="app-title">{{ disease }} Prediction</div>
 
-<p><strong>Diagnosis:</strong> {{ prediction }}</p>
+<div class="result-card 
+{% if prediction in ['Diabetic','Heart Disease Detected'] %}
+high-risk
+{% else %}
+low-risk
+{% endif %}
+">
+
+<img src="https://cdn-icons-png.flaticon.com/512/2966/2966489.png" class="medical-icon">
+
+<div class="result-title">
+    {{ prediction }}
+</div>
+
 <p><strong>Probability:</strong> {{ probability }}%</p>
 <p><strong>Risk Level:</strong> {{ risk_level }}</p>
 
 {% if prediction in ["Diabetic", "Heart Disease Detected"] %}
-    <p style="color:red;"><strong>⚠ High Risk. Please consult a doctor.</strong></p>
+<p style="color:red; margin-top:10px;">
+⚠ High Risk – Consult a Doctor
+</p>
 {% else %}
-    <p style="color:green;"><strong>✓ Low Risk Detected.</strong></p>
+<p style="color:lime; margin-top:10px;">
+✓ Low Risk – Healthy Indicators
+</p>
 {% endif %}
 
-<br>
-<a href="/">Check Another Patient</a>
+</div>
 
+<br>
+<div style="text-align:center;">
+<a href="/"><button>Check Another Patient</button></a>
+</div>
+
+</div>
 </body>
 </html>
