@@ -1,33 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health Risk AI System</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Health Risk Prediction</title>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body>
-<div class="container">
 
-<h1 class="app-title">Health Risk AI System</h1>
+<body class="home-body">
 
-<p style="text-align:center; margin-bottom:30px; color:#555;">
-Intelligent ML-Based Disease Prediction System
+<section class="hero">
+
+<h1>AI Health Risk Prediction System</h1>
+
+<p>
+Predict the risk of <b>Diabetes</b> and <b>Heart Disease</b> using Machine Learning
 </p>
 
-<div style="display:flex; justify-content:center; gap:30px;">
+</section>
 
-    <a href="/diabetes">
-        <button>🧪 Diabetes Prediction</button>
-    </a>
 
-    <a href="/heart">
-        <button>❤️ Heart Disease Prediction</button>
-    </a>
+<section class="cards">
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/diabetes1.png') }}" alt="Diabetes">
+
+<h3>Diabetes Prediction</h3>
+
+<a href="/diabetes">
+<button>Check Risk</button>
+</a>
 
 </div>
 
+
+<div class="card">
+
+<img src="{{ url_for('static', filename='images/heart1.png') }}" alt="Heart">
+
+<h3>Heart Disease Prediction</h3>
+
+<a href="/heart">
+<button>Check Risk</button>
+</a>
+
 </div>
+
+</section>
+
 </body>
-
 </html>
