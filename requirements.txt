@@ -25,3 +25,4 @@ threadpoolctl==3.6.0
 tzdata==2025.3
 Werkzeug==3.1.5
 xgboost==2.1.1
+gunicorn==23.0.0
