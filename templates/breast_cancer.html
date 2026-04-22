@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Breast Cancer Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <a href="/" class="back-home">← Back to Home</a>
+    <div class="container">
+        <h2>🎗️ Breast Cancer Prediction</h2>
+
+        {% if result %}
+        <div class="result-box {{ color }}">
+            <h3>Prediction: {{ result }}</h3>
+            <p>Confidence: {{ confidence }}%</p>
+            {% if result == 'MALIGNANT' %}
+            <p>⚠️ Please consult a doctor immediately!</p>
+            {% else %}
+            <p>✅ No cancer detected. Stay healthy!</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        {% if error %}
+        <div class="result-box danger">
+            <p>Error: {{ error }}</p>
+        </div>
+        {% endif %}
+
+        <div class="disclaimer">
+            ⚠️ This is not a substitute for professional medical advice.
+        </div>
+
+        <form action="/predict-breast-cancer" method="POST">
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Radius Mean</label>
+                    <input type="number" step="any" name="radius_mean" placeholder="e.g. 17.99" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Texture Mean</label>
+                    <input type="number" step="any" name="texture_mean" placeholder="e.g. 10.38" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Perimeter Mean</label>
+                    <input type="number" step="any" name="perimeter_mean" placeholder="e.g. 122.8" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Area Mean</label>
+                    <input type="number" step="any" name="area_mean" placeholder="e.g. 1001" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Smoothness Mean</label>
+                    <input type="number" step="any" name="smoothness_mean" placeholder="e.g. 0.1184" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Compactness Mean</label>
+                    <input type="number" step="any" name="compactness_mean" placeholder="e.g. 0.2776" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Concavity Mean</label>
+                    <input type="number" step="any" name="concavity_mean" placeholder="e.g. 0.3001" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Concave Points Mean</label>
+                    <input type="number" step="any" name="concave points_mean" placeholder="e.g. 0.1471" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Symmetry Mean</label>
+                    <input type="number" step="any" name="symmetry_mean" placeholder="e.g. 0.2419" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Fractal Dimension Mean</label>
+                    <input type="number" step="any" name="fractal_dimension_mean" placeholder="e.g. 0.0787" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Radius SE</label>
+                    <input type="number" step="any" name="radius_se" placeholder="e.g. 1.095" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Texture SE</label>
+                    <input type="number" step="any" name="texture_se" placeholder="e.g. 0.9053" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Perimeter SE</label>
+                    <input type="number" step="any" name="perimeter_se" placeholder="e.g. 8.589" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Area SE</label>
+                    <input type="number" step="any" name="area_se" placeholder="e.g. 153.4" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Smoothness SE</label>
+                    <input type="number" step="any" name="smoothness_se" placeholder="e.g. 0.0064" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Compactness SE</label>
+                    <input type="number" step="any" name="compactness_se" placeholder="e.g. 0.049" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Concavity SE</label>
+                    <input type="number" step="any" name="concavity_se" placeholder="e.g. 0.0537" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Concave Points SE</label>
+                    <input type="number" step="any" name="concave points_se" placeholder="e.g. 0.0159" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Symmetry SE</label>
+                    <input type="number" step="any" name="symmetry_se" placeholder="e.g. 0.03" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Fractal Dimension SE</label>
+                    <input type="number" step="any" name="fractal_dimension_se" placeholder="e.g. 0.006" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Radius Worst</label>
+                    <input type="number" step="any" name="radius_worst" placeholder="e.g. 25.38" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Texture Worst</label>
+                    <input type="number" step="any" name="texture_worst" placeholder="e.g. 17.33" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Perimeter Worst</label>
+                    <input type="number" step="any" name="perimeter_worst" placeholder="e.g. 184.6" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Area Worst</label>
+                    <input type="number" step="any" name="area_worst" placeholder="e.g. 2019" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Smoothness Worst</label>
+                    <input type="number" step="any" name="smoothness_worst" placeholder="e.g. 0.1622" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Compactness Worst</label>
+                    <input type="number" step="any" name="compactness_worst" placeholder="e.g. 0.6656" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Concavity Worst</label>
+                    <input type="number" step="any" name="concavity_worst" placeholder="e.g. 0.7119" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Concave Points Worst</label>
+                    <input type="number" step="any" name="concave points_worst" placeholder="e.g. 0.2654" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Symmetry Worst</label>
+                    <input type="number" step="any" name="symmetry_worst" placeholder="e.g. 0.4601" required><br><br>
+                </div>
+
+                <div class="form-group">
+                    <label>Fractal Dimension Worst</label>
+                    <input type="number" step="any" name="fractal_dimension_worst" placeholder="e.g. 0.1189" required><br><br>
+                </div>
+                </div>
+            <br>
+            <div style="text-align:center;">
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

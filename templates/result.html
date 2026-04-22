@@ -16,8 +16,11 @@ high-risk
 low-risk
 {% endif %}
 ">
-
+{% if disease == "Breast Cancer" %}
+<img src="https://cdn-icons-png.flaticon.com/512/2966/2966490.png" class="medical-icon">
+{% else %}
 <img src="https://cdn-icons-png.flaticon.com/512/2966/2966489.png" class="medical-icon">
+{% endif %}
 
 <div class="result-title">
     {{ prediction }}
@@ -26,7 +29,7 @@ low-risk
 <p><strong>Probability:</strong> {{ probability }}%</p>
 <p><strong>Risk Level:</strong> {{ risk_level }}</p>
 
-{% if prediction in ["Diabetic", "Heart Disease Detected"] %}
+{% if prediction in ["Diabetic", "Heart Disease Detected", "Malignant - Cancer Detected"] %}
 <p style="color:red; margin-top:10px;">
 ⚠ High Risk – Consult a Doctor
 </p>
