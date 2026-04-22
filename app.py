@@ -173,6 +173,73 @@ def predict_heart():
 
     except Exception as e:
         return f"Heart Prediction Error: {e}"
+    
+
+
+
+
+
+    
+
+    # =====================================
+# Breast Cancer Model
+# =====================================
+breast_cancer_model = joblib.load("models/breast_cancer_model.pkl")
+breast_cancer_scaler = joblib.load("models/breast_cancer_scaler.pkl")
+
+# =====================================
+# Breast Cancer Page Route
+# =====================================
+@app.route("/breast-cancer")
+def breast_cancer_page():
+    return render_template("breast_cancer.html")
+
+# =====================================
+# Breast Cancer Predict Route
+# =====================================
+@app.route("/predict-breast-cancer", methods=["POST"])
+def predict_breast_cancer():
+    try:
+        # Get form data
+        features = [
+            'radius_mean', 'texture_mean', 'perimeter_mean', 'area_mean',
+            'smoothness_mean', 'compactness_mean', 'concavity_mean',
+            'concave points_mean', 'symmetry_mean', 'fractal_dimension_mean',
+            'radius_se', 'texture_se', 'perimeter_se', 'area_se',
+            'smoothness_se', 'compactness_se', 'concavity_se',
+            'concave points_se', 'symmetry_se', 'fractal_dimension_se',
+            'radius_worst', 'texture_worst', 'perimeter_worst', 'area_worst',
+            'smoothness_worst', 'compactness_worst', 'concavity_worst',
+            'concave points_worst', 'symmetry_worst', 'fractal_dimension_worst'
+        ]
+
+        # Collect input
+        input_data = {f: float(request.form[f]) for f in features}
+        input_df = pd.DataFrame([input_data])
+
+        # Scale and predict
+        input_scaled = breast_cancer_scaler.transform(input_df)
+        prediction = breast_cancer_model.predict(input_scaled)
+        probability = breast_cancer_model.predict_proba(input_scaled)
+
+        # Result
+        if prediction[0] == 1:
+           result = "Malignant - Cancer Detected"
+           probability_val = round(probability[0][1] * 100, 2)
+           risk_level = "High Risk"
+        else:
+           result = "Benign - No Cancer"
+           probability_val = round(probability[0][0] * 100, 2)
+           risk_level = "Low Risk"
+
+        return render_template("result.html",
+                      disease="Breast Cancer",
+                      prediction=result,
+                      probability=probability_val,
+                      risk_level=risk_level)
+    except Exception as e:
+        return render_template("breast_cancer.html",
+                             error=str(e))
 
 
 # =====================================
@@ -181,3 +248,4 @@ def predict_heart():
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port)
+
