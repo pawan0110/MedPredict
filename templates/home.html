@@ -16,7 +16,7 @@
 <h1>Med Predict</h1>
 
 <p>
-Predict the risk of <b>Diabetes</b>, <b>Heart Disease</b>, and <b>Breast Cancer</b>  using Machine Learning
+Predict the risk of <b>Diabetes</b>, <b>Heart Disease</b>, <b>Breast Cancer</b> and <b>Kidney Disease</b> using Machine Learning
 </p>
 
 </section>
@@ -25,38 +25,43 @@ Predict the risk of <b>Diabetes</b>, <b>Heart Disease</b>, and <b>Breast Cancer<
 <section class="cards">
 
 <div class="card">
-
 <img src="{{ url_for('static', filename='images/diabetes1.png') }}" alt="Diabetes">
-
 <h3>Diabetes Prediction</h3>
-
 <a href="/diabetes">
 <button>Check Risk</button>
 </a>
-
 </div>
 
-
 <div class="card">
-
 <img src="{{ url_for('static', filename='images/heart1.png') }}" alt="Heart">
-
 <h3>Heart Disease Prediction</h3>
-
 <a href="/heart">
 <button>Check Risk</button>
 </a>
-
 </div>
 
-
-<!-- Breast Cancer Card -->
 <div class="card">
-    <img src="{{ url_for('static', filename='images/breast_cancer.png') }}" alt="Breast Cancer">
-    <h3>Breast Cancer Prediction</h3>
-    <a href="/breast-cancer">
-        <button>Check Risk</button>
-    </a>
+<img src="{{ url_for('static', filename='images/breast_cancer.png') }}" alt="Breast Cancer">
+<h3>Breast Cancer Prediction</h3>
+<a href="/breast-cancer">
+<button>Check Risk</button>
+</a>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3004/3004458.png" alt="Kidney Disease">
+<h3>Kidney Disease Prediction</h3>
+<a href="/kidney">
+<button>Check Risk</button>
+</a>
+</div>
+
+<div class="card">
+<img src="https://cdn-icons-png.flaticon.com/512/3774/3774299.png" alt="Liver">
+<h3>Liver Disease Prediction</h3>
+<a href="/liver">
+<button>Check Risk</button>
+</a>
 </div>
 
 </section>

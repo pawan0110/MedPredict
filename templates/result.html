@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Prediction Result</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">s
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 <div class="container">
@@ -10,40 +10,41 @@
 <div class="app-title">{{ disease }} Prediction</div>
 
 <div class="result-card 
-{% if prediction in ['Diabetic','Heart Disease Detected'] %}
+{% if prediction in ['Diabetic', 'Heart Disease Detected', 'Malignant - Cancer Detected', 'High Risk', 'Severe Disease'] %}
 high-risk
+{% elif prediction in ['Moderate Risk'] %}
+moderate-risk
 {% else %}
 low-risk
 {% endif %}
 ">
+
 {% if disease == "Breast Cancer" %}
 <img src="https://cdn-icons-png.flaticon.com/512/2966/2966490.png" class="medical-icon">
+{% elif disease == "Kidney Disease" %}
+<img src="https://cdn-icons-png.flaticon.com/512/3004/3004458.png" class="medical-icon">
 {% else %}
 <img src="https://cdn-icons-png.flaticon.com/512/2966/2966489.png" class="medical-icon">
 {% endif %}
 
-<div class="result-title">
-    {{ prediction }}
-</div>
+<div class="result-title">{{ prediction }}</div>
 
 <p><strong>Probability:</strong> {{ probability }}%</p>
 <p><strong>Risk Level:</strong> {{ risk_level }}</p>
 
-{% if prediction in ["Diabetic", "Heart Disease Detected", "Malignant - Cancer Detected"] %}
-<p style="color:red; margin-top:10px;">
-⚠ High Risk – Consult a Doctor
-</p>
+{% if risk_level == "High Risk" %}
+<p style="color:red; margin-top:10px;">⚠ High Risk – Consult a Doctor Immediately</p>
+{% elif risk_level == "Moderate Risk" %}
+<p style="color:orange; margin-top:10px;">⚠ Moderate Risk – Monitor Closely</p>
 {% else %}
-<p style="color:lime; margin-top:10px;">
-✓ Low Risk – Healthy Indicators
-</p>
+<p style="color:lime; margin-top:10px;">✓ Low Risk – Healthy Indicators</p>
 {% endif %}
 
 </div>
 
 <br>
 <div style="text-align:center;">
-<a href="/"><button>Check Another Patient</button></a>
+    <a href="/"><button>Check Another Patient</button></a>
 </div>
 
 </div>

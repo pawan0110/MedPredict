@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Kidney Disease Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <a href="/" class="back-home">← Back to Home</a>
+    <div class="container">
+        <h2>🫘 Kidney Disease Risk Prediction</h2>
+
+        {% if error %}
+        <p style="color:red;">⚠ Error: {{ error }}</p>
+        {% endif %}
+
+        <form action="/predict_kidney" method="post">
+            <div class="form-grid">
+                <div class="form-group">
+
+                    <label>Age:</label>
+                    <input type="number" step="0.1" name="age" required><br><br>
+
+                    <label>Blood Pressure (mm/hg):</label>
+                    <input type="number" step="0.1" name="blood_pressure" required><br><br>
+
+                    <label>Specific Gravity of Urine:</label>
+                    <input type="number" step="0.001" name="specific_gravity" placeholder="e.g. 1.020" required><br><br>
+
+                    <label>Albumin in Urine:</label>
+                    <input type="number" step="0.1" name="albumin" required><br><br>
+
+                    <label>Sugar in Urine:</label>
+                    <input type="number" step="0.1" name="sugar" required><br><br>
+
+                    <label>Random Blood Glucose (mg/dl):</label>
+                    <input type="number" step="0.1" name="blood_glucose" required><br><br>
+
+                    <label>Blood Urea (mg/dl):</label>
+                    <input type="number" step="0.1" name="blood_urea" required><br><br>
+
+                    <label>Serum Creatinine (mg/dl):</label>
+                    <input type="number" step="0.01" name="serum_creatinine" required><br><br>
+
+                    <label>Sodium Level (meq/l):</label>
+                    <input type="number" step="0.1" name="sodium" required><br><br>
+
+                    <label>Potassium Level (meq/l):</label>
+                    <input type="number" step="0.1" name="potassium" required><br><br>
+
+                    <label>Hemoglobin Level (gms):</label>
+                    <input type="number" step="0.1" name="hemoglobin" required><br><br>
+
+                    <label>Packed Cell Volume (%):</label>
+                    <input type="number" step="0.1" name="packed_cell_volume" required><br><br>
+
+                    <label>White Blood Cell Count (cells/cumm):</label>
+                    <input type="number" step="1" name="wbc_count" required><br><br>
+
+                    <label>Red Blood Cell Count (millions/cumm):</label>
+                    <input type="number" step="0.01" name="rbc_count" required><br><br>
+
+                    <label>eGFR:</label>
+                    <input type="number" step="0.1" name="egfr" required><br><br>
+
+                    <label>Urine Protein-to-Creatinine Ratio:</label>
+                    <input type="number" step="0.01" name="urine_protein_creatinine" required><br><br>
+
+                    <label>Urine Output (ml/day):</label>
+                    <input type="number" step="1" name="urine_output" required><br><br>
+
+                    <label>Serum Albumin Level:</label>
+                    <input type="number" step="0.1" name="serum_albumin" required><br><br>
+
+                    <label>Cholesterol Level:</label>
+                    <input type="number" step="0.1" name="cholesterol" required><br><br>
+
+                    <label>Parathyroid Hormone (PTH) Level:</label>
+                    <input type="number" step="0.1" name="pth_level" required><br><br>
+
+                    <label>Serum Calcium Level:</label>
+                    <input type="number" step="0.1" name="serum_calcium" required><br><br>
+
+                    <label>Serum Phosphate Level:</label>
+                    <input type="number" step="0.1" name="serum_phosphate" required><br><br>
+
+                    <label>Body Mass Index (BMI):</label>
+                    <input type="number" step="0.01" name="bmi" required><br><br>
+
+                    <label>Duration of Diabetes Mellitus (years):</label>
+                    <input type="number" step="0.1" name="diabetes_duration" required><br><br>
+
+                    <label>Duration of Hypertension (years):</label>
+                    <input type="number" step="0.1" name="hypertension_duration" required><br><br>
+
+                    <label>Cystatin C Level:</label>
+                    <input type="number" step="0.01" name="cystatin_c" required><br><br>
+
+                    <label>C-Reactive Protein (CRP) Level:</label>
+                    <input type="number" step="0.01" name="crp_level" required><br><br>
+
+                    <label>Interleukin-6 (IL-6) Level:</label>
+                    <input type="number" step="0.01" name="il6_level" required><br><br>
+
+                    <label>Red Blood Cells in Urine:</label>
+                    <select name="rbc_urine" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select><br><br>
+
+                    <label>Pus Cells in Urine:</label>
+                    <select name="pus_cells" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select><br><br>
+
+                    <label>Pus Cell Clumps in Urine:</label>
+                    <select name="pus_cell_clumps" required>
+                        <option value="notpresent">Not Present</option>
+                        <option value="present">Present</option>
+                    </select><br><br>
+
+                    <label>Bacteria in Urine:</label>
+                    <select name="bacteria" required>
+                        <option value="notpresent">Not Present</option>
+                        <option value="present">Present</option>
+                    </select><br><br>
+
+                    <label>Hypertension:</label>
+                    <select name="hypertension_yn" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select><br><br>
+
+                    <label>Diabetes Mellitus:</label>
+                    <select name="diabetes_yn" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select><br><br>
+
+                    <label>Coronary Artery Disease:</label>
+                    <select name="cad" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select><br><br>
+
+                    <label>Appetite:</label>
+                    <select name="appetite" required>
+                        <option value="good">Good</option>
+                        <option value="poor">Poor</option>
+                    </select><br><br>
+
+                    <label>Pedal Edema:</label>
+                    <select name="pedal_edema" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select><br><br>
+
+                    <label>Anemia:</label>
+                    <select name="anemia" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select><br><br>
+
+                    <label>Family History of CKD:</label>
+                    <select name="family_history" required>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select><br><br>
+
+                    <label>Smoking Status:</label>
+                    <select name="smoking_status" required>
+                        <option value="non-smoker">Non-Smoker</option>
+                        <option value="ex-smoker">Ex-Smoker</option>
+                        <option value="smoker">Smoker</option>
+                    </select><br><br>
+
+                    <label>Physical Activity Level:</label>
+                    <select name="physical_activity" required>
+                        <option value="low">Low</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="high">High</option>
+                    </select><br><br>
+
+                    <label>Urinary Sediment Microscopy:</label>
+                    <select name="urinary_sediment" required>
+                        <option value="normal">Normal</option>
+                        <option value="abnormal">Abnormal</option>
+                    </select><br><br>
+
+                </div>
+            </div>
+
+            <br>
+            <div style="text-align:center;">
+                <button type="submit">Predict</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
