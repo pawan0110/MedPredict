@@ -10,3 +10,4 @@ __pycache__/
 .vscode/
 
 datasets
+models/best_model_Random_Forest.pkl
