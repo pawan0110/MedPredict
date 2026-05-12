@@ -6,6 +6,10 @@ The system currently predicts the risk of:
 
 * 🧪 **Diabetes**
 * ❤️ **Heart Disease**
+* 🫁 **Breast Cancer**
+* 🫘 **Kidney Disease**
+* 🫀 **Liver Disease**
+* 🤖 **Medical Assistant Chatbot**
 
 Users input medical parameters through a web interface and the system uses trained **machine learning models** to estimate disease risk.
 
@@ -25,6 +29,10 @@ This project demonstrates the integration of **Machine Learning, Flask Web Devel
 
 * Diabetes Risk Prediction
 * Heart Disease Risk Prediction
+* Breast Cancer Risk Prediction
+* Kidney Disease Risk Prediction
+* Liver Disease Risk Prediction
+* Medical Assistant Chatbot
 * Real-time ML predictions
 * Risk probability calculation
 * Risk level classification (Low / Moderate / High)
@@ -184,6 +192,12 @@ Prediction threshold:
 ```
 Threshold = 0.30
 ```
+
+---
+
+### Medical Assistant Chatbot
+
+The chatbot provides general health information, explains prediction results, and answers questions about the app. It uses AI (Groq) and web search (Tavily) for responses, but always advises consulting a professional doctor. It does not provide medical diagnoses or treatments.
 
 ---
 

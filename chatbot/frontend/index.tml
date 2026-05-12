@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>chatDPT</title>
+  </head>
+
+  <body class="bg-neutral-900 text-white">
+    <!-- Chat container (EMPTY by default) -->
+    <div
+      id="chatContainer"
+      class="container mx-auto max-w-3xl px-4 pb-40"
+    ></div>
+
+    <!-- ChatGPT-style input -->
+    <div class="fixed inset-x-0 bottom-0 bg-neutral-900">
+      <div class="max-w-3xl mx-auto px-4 pb-4">
+        <div
+          class="flex items-end gap-2 bg-neutral-800 rounded-2xl p-3 shadow-lg"
+        >
+          <textarea
+            id="input"
+            rows="1"
+            placeholder="Message chatDPT..."
+            class="flex-1 resize-none bg-transparent outline-none text-white placeholder-gray-400 max-h-40"
+          ></textarea>
+
+          <button
+            id="askBtn"
+            class="bg-white text-black px-4 py-1.5 rounded-xl hover:bg-gray-300 transition"
+          >
+            Send
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script src="./script.js"></script>
+  </body>
+</html>

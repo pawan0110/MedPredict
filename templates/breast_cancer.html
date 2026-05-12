@@ -5,6 +5,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    <a href="/chatbot" class="chat-help">Need Help?</a>
     <a href="/" class="back-home">← Back to Home</a>
     <div class="container">
         <h2>🎗️ Breast Cancer Prediction</h2>
@@ -28,7 +29,7 @@
         {% endif %}
 
         <div class="disclaimer">
-            ⚠️ This is not a substitute for professional medical advice.
+            <!-- ⚠️ This is not a substitute for professional medical advice. -->
         </div>
 
         <form action="/predict-breast-cancer" method="POST">

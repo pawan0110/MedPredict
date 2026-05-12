@@ -26,6 +26,9 @@ tzdata==2025.3
 Werkzeug==3.1.5
 xgboost==2.1.1
 gunicorn==23.0.0
+groq==1.2.0
+tavily-python==0.7.24
+python-dotenv==1.2.2
 
 
 # pandas==2.2.2
