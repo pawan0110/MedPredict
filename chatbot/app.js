@@ -16,7 +16,7 @@ async function main() {
     {
       role: "system",
       content: `You are a helpful assistant. Use tools when real-time data is required.
-      current date and time: ${new Date().toUTCString()}`,
+      current date and time: ${new Date().zatoUTCString()}`,
     },
   ];
 
