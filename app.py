@@ -47,7 +47,7 @@ heart_model = joblib.load("models/heart_disease_model.pkl")
 HEART_THRESHOLD = 0.30
 
 # ---- Breast Cancer Model ----
-breast_cancer_model = joblib.load("models/breast_cancer_model.pkl")
+breast_cancer_model = joblib.load("models/best_breast_cancer_model.pkl")
 breast_cancer_scaler = joblib.load("models/breast_cancer_scaler.pkl")
 
 # ---- Kidney Disease Model ----
