@@ -412,11 +412,6 @@ Run Flask application
 Public URL generated
 ```
 
-Live App:
-
-[https://medpredict-nlff.onrender.com](https://medpredict-nlff.onrender.com)
-
----
 
 # ⚠ Disclaimer
 
