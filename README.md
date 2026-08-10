@@ -17,12 +17,6 @@ This project demonstrates the integration of **Machine Learning, Flask Web Devel
 
 ---
 
-# 🌐 Live Demo
-
-🔗 **Live Application**
-
-[https://medpredict-nlff.onrender.com](https://medpredict-nlff.onrender.com)
-
 ---
 
 # 🚀 Features
